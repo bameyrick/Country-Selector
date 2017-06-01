@@ -1,0 +1,17 @@
+{
+  "name": "country-picker",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ben Meyrick <bameyrick@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "cldr-core": "^31.0.1",
+    "cldr-localenames-modern": "^31.0.1",
+    "jsonfile": "^3.0.0",
+    "normalize-scss": "^7.0.0"
+  }
+}

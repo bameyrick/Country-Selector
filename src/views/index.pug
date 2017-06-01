@@ -1,0 +1,17 @@
+doctype html
+html
+	head
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+			
+		title Country Selector
+
+		link(rel="stylesheet", type="text/css", href="/css/styles.css")
+	body
+		
+		
+		if debug
+			script(src="//localhost:35729/livereload.js")
+			<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':8080/js/app.js" async defer></' + 'script>')</script>
+		else
+			script(src="./js/app.js" async defer)

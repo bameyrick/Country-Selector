@@ -1,0 +1,5 @@
+node_modules/
+[Bb]uild/
+.vscode/
+*.log
+territories.json
