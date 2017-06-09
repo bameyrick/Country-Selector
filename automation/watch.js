@@ -27,6 +27,7 @@ module.exports = {
 		options: {
 			spawn: true,
 			interrupt: true,
+			livereload: true,
 		},
 	},
 };

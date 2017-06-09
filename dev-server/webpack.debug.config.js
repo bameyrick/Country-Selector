@@ -35,7 +35,6 @@ module.exports = {
 	],
 
 	output: {
-			path: path.join(__dirname, "/build/js"),
 			publicPath: `http://${ip}:8080/js/`,
 			filename: "app.js"
 	},
@@ -63,7 +62,7 @@ module.exports = {
 
 					{
 						test: /\.json$/,
-						loader: "json",
+						loader: "json-loader",
 					}
 			]
 	},

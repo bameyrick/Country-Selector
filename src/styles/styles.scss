@@ -1,2 +1,20 @@
-@import "../../node_modules/normalize-scss/sass/normalize";
+// ========================================================
+// BASE 
+// ========================================================
+@import '../../node_modules/normalize-scss/sass/normalize';
 @include normalize();
+@import 'base/_colours';
+@import 'base/_settings';
+@import 'base/_typography';
+
+// ========================================================
+// LAYOUT 
+// ========================================================
+@import 'layout/_Container';
+
+// ========================================================
+// COMPONENTS 
+// ========================================================
+@import 'components/_Form';
+@import 'components/_FormControl';
+@import 'components/_Autosuggest';

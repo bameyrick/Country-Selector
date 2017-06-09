@@ -5,6 +5,7 @@ module.exports = {
 		webpack: webpackDebugConfig,
 		publicPath: webpackDebugConfig.output.publicPath,
 		host: "0.0.0.0",
+		disableHostCheck: true
 	},
 	start: {
 		webpack: {

@@ -1,0 +1,14 @@
+.Form {
+
+	&__row {
+		padding-top: $collapse-padding;
+		padding-bottom: $collapse-padding;
+	}
+
+	&__label {
+		display: block;
+		margin-bottom: .25em;
+		font-weight: bold;
+	}
+
+}

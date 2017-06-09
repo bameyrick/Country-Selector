@@ -1,64 +1,45 @@
 const jsonfile = require('jsonfile');
 const availableLocales = require('./node_modules/cldr-core/availableLocales').availableLocales.modern;
-const localesArg = process.argv.filter((val, index, array) => val.includes('locales='))[0];
 const fileArg = process.argv.filter((val, index, array) => val.includes('file='))[0];
 
 const territories = {};
 
-let requestedLocales = [];
-let fileLoc = 'territories.json';
+let fileLoc = './build/countries';
 
-// Default to en if no args are provided
-if(localesArg) {
-	requestedLocales = localesArg.split('=')[1].split(',');
-} else {
-	requestedLocales.push('en');
-}
 
 if(fileArg) {
 	fileLoc = fileArg.split('=')[1];
 }
 
-// Check that all requested locales are valid
-requestedLocales.forEach(locale => {
-	if(availableLocales.includes(locale)) {
-		addLocaleToArray(locale);
-	} else {
-		throw new Error(`The locale ${locale} could not be found. Reminder: locale arguments are CASE SENSITIVE.`);
-	}
+availableLocales.forEach(locale => {
+	const json =  require(`./node_modules/cldr-localenames-modern/main/${locale}/territories.json`);
+	const territory = json.main[locale].localeDisplayNames.territories;
+
+	jsonfile.writeFile(`${fileLoc}/${locale}.json`, mapTerritories(json.main[locale].localeDisplayNames.territories));
 });
 
-function addLocaleToArray(locale) {
-	const json =  require(`./node_modules/cldr-localenames-modern/main/${locale}/territories.json`);
-	const allTeritories = json.main[locale].localeDisplayNames.territories;
-	
-	for(let key in allTeritories) {
-		if(allTeritories.hasOwnProperty(key) && isNaN(parseInt(key))) {
-			addTerritory(locale, key, allTeritories[key]);
+function mapTerritories(territories) {
+	const result = {};
+
+	for (let key in territories) {
+		if (territories.hasOwnProperty(key) && isNaN(parseInt(key))) {
+			const name = territories[key];
+			let prop = 'p';
+
+			if(key.includes('-alt-short')) {
+				key = key.replace('-alt-short', '');
+				prop = 's';
+			} else if(key.includes('-alt-variant')) {
+				key = key.replace('-alt-variant', '');
+				prop = 'v';
+			}
+
+			if(!result[key]) {
+				result[key] = {};
+			}
+
+			result[key][prop] = name;
 		}
 	}
-
-	jsonfile.writeFile(`./${fileLoc}`, territories);
-}
-
-function addTerritory(locale, key, name) {
-	let prop = 'p';
-
-	if(key.includes('-alt-short')) {
-		key = key.replace('-alt-short', '');
-		prop = 's';
-	} else if(key.includes('-alt-variant')) {
-		key = key.replace('-alt-variant', '');
-		prop = 'v';
-	}
-
-	if(!territories[key]) {
-		territories[key] = {};
-	}
-
-	if(!territories[key][locale]) {
-		territories[key][locale] = {};
-	}
-
-	territories[key][locale][prop] = name;
+	return result;
 }
