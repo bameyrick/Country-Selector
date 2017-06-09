@@ -169,7 +169,7 @@ export class Autosuggest {
 
 	private handleBlur(): void {
 
-		if (this.results.length) {
+		if (this.results.length && this.query) {
 			this.selectResult();
 		}
 

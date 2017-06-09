@@ -9,6 +9,7 @@
   "author": "Ben Meyrick <bameyrick@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^7.0.29",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
     "babel-preset-es2015": "^6.24.1",
